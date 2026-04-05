@@ -9,11 +9,12 @@
 		"thatDudo"
 	],
 	"contact": {
-		"homepage": "",
-		"sources": ""
+		"homepage": "https://modrinth.com/mod/omniscience-awakened",
+		"sources": "https://github.com/BattleDog249/omniscience-awakened",
+		"issues": "https://github.com/BattleDog249/omniscience-awakened/issues"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/omniscience/icon1_256x256.png",
+	"icon": "assets/omniscience/icon.png",
 	"environment": "client",
 	"entrypoints": {
 		"client": [
