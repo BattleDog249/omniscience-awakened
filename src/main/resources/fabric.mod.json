@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "omniscience",
+	"version": "${version}",
+	"name": "Omniscience",
+	"description": "This mod is all about letting you see things you wouldn't normally get to see. It's main use is revealing invisible entities.",
+	"authors": [
+		"BattleDog249",
+		"thatDudo"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/omniscience/icon1_256x256.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.battle.omniscience.Omniscience"
+		],
+		"modmenu": [
+			"com.battle.omniscience.integration.ModMenu"
+		]
+	},
+	"mixins": [
+		"omniscience.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.6",
+		"minecraft": "~26.1.1",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
