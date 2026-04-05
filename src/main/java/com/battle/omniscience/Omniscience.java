@@ -25,7 +25,7 @@ public class Omniscience implements ClientModInitializer {
 
     // The translation key of the keybinding category.
     public static final KeyMapping.Category OMNISCIENCE = new KeyMapping.Category(
-            Identifier.fromNamespaceAndPath(Omniscience.MOD_ID, "key_category"));
+            Identifier.fromNamespaceAndPath("minecraft", Omniscience.MOD_ID));
 
     private KeyMapping keyBindingOpenSettings;
     private KeyMapping keyToggleEnabled;
