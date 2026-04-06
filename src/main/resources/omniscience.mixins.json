@@ -6,7 +6,6 @@
 	],
 	"client": [
 		"EntityVisibilityMixin",
-		"ForceNameTagMixin",
 		"EntityGlowMixin",
 		"ModelPartAlphaMixin",
 		"BlindnessFogMixin",
