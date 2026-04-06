@@ -81,7 +81,7 @@ public class ForceNameTagMixin {
         diagnosticCalls++;
     }
 
-    @Inject(at = @At("HEAD"), method = "submitNameDisplay(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V")
+    @Inject(at = @At("HEAD"), method = "submitNameTag(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V")
     private void onSubmitNameDisplay(AvatarRenderState state, PoseStack stack, SubmitNodeCollector collector, CameraRenderState camera, CallbackInfo ci) {
         if (diagnosticCalls < 20) {
             boolean renderNames = Minecraft.getInstance().renderNames();

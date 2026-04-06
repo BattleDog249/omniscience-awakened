@@ -2,8 +2,6 @@ package com.battle.omniscience;
 
 import org.lwjgl.glfw.GLFW;
 
-import java.lang.reflect.Method;
-
 import com.battle.omniscience.config.ConfigManager;
 import com.battle.omniscience.gui.ScreenBuilder;
 
@@ -38,13 +36,13 @@ public class Omniscience implements ClientModInitializer {
         ConfigManager.init();
 
         // adding keybinding to settings
-        keyBindingOpenSettings = registerKeyMapping(new KeyMapping(
+        keyBindingOpenSettings = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "key.omniscience.settings",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 OMNISCIENCE));
 
-        keyToggleEnabled = registerKeyMapping(new KeyMapping(
+        keyToggleEnabled = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "key.omniscience.enable",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
@@ -71,34 +69,6 @@ public class Omniscience implements ClientModInitializer {
         ConfigManager.getConfig().enabled = !enabled;
         Component message = Component.translatable(enabled ? "message.disabled" : "message.enabled", MOD_NAME)
                 .withStyle(enabled ? ChatFormatting.RED : ChatFormatting.GREEN);
-        client.player.displayClientMessage(message, false);
-    }
-
-    private static KeyMapping registerKeyMapping(KeyMapping keyMapping) {
-        try {
-            Method method = KeyBindingHelper.class.getMethod("registerKeyBinding", KeyMapping.class);
-            Object result = method.invoke(null, keyMapping);
-            if (result instanceof KeyMapping mapping) {
-                return mapping;
-            }
-        } catch (NoSuchMethodException e) {
-            for (Method method : KeyBindingHelper.class.getMethods()) {
-                if (!method.getName().equals("registerKeyBinding") || method.getParameterCount() != 1) {
-                    continue;
-                }
-
-                try {
-                    Object result = method.invoke(null, keyMapping);
-                    if (result instanceof KeyMapping mapping) {
-                        return mapping;
-                    }
-                } catch (ReflectiveOperationException ignored) {
-                }
-            }
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
-        }
-
-        return keyMapping;
+        client.player.displayClientMessage(message, true);
     }
 }

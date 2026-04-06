@@ -27,7 +27,6 @@ import net.minecraft.resources.Identifier;
 @Mixin(SheepWoolLayer.class)
 public class InvisibleSheepWoolMixin {
     @Shadow @Final private static Identifier SHEEP_WOOL_LOCATION;
-    @Shadow @Final private static Identifier BABY_SHEEP_WOOL_LOCATION;
     @Shadow @Final private EntityModel<SheepRenderState> adultModel;
     @Shadow @Final private EntityModel<SheepRenderState> babyModel;
 
@@ -54,7 +53,7 @@ public class InvisibleSheepWoolMixin {
         }
 
         MultiBufferSource.BufferSource entityVertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
-        VertexConsumer vertexConsumer2 = entityVertexConsumers.getBuffer(RenderTypes.entityTranslucent(sheepRenderState.isBaby ? BABY_SHEEP_WOOL_LOCATION : SHEEP_WOOL_LOCATION, true));
+        VertexConsumer vertexConsumer2 = entityVertexConsumers.getBuffer(RenderTypes.entityTranslucent(SHEEP_WOOL_LOCATION));
         EntityModel<SheepRenderState> model = sheepRenderState.isBaby ? this.babyModel : this.adultModel;
         int color = sheepRenderState.getWoolColor() & 0x26FFFFFF;
         int overlay = LivingEntityRenderer.getOverlayCoords(sheepRenderState, 0.0f);
