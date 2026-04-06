@@ -2,12 +2,14 @@ package com.battle.omniscience;
 
 import org.lwjgl.glfw.GLFW;
 
+import java.lang.reflect.Method;
+
 import com.battle.omniscience.config.ConfigManager;
 import com.battle.omniscience.gui.ScreenBuilder;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -36,13 +38,13 @@ public class Omniscience implements ClientModInitializer {
         ConfigManager.init();
 
         // adding keybinding to settings
-        keyBindingOpenSettings = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+        keyBindingOpenSettings = registerKeyMapping(new KeyMapping(
                 "key.omniscience.settings",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 OMNISCIENCE));
 
-        keyToggleEnabled = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+        keyToggleEnabled = registerKeyMapping(new KeyMapping(
                 "key.omniscience.enable",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
@@ -69,6 +71,34 @@ public class Omniscience implements ClientModInitializer {
         ConfigManager.getConfig().enabled = !enabled;
         Component message = Component.translatable(enabled ? "message.disabled" : "message.enabled", MOD_NAME)
                 .withStyle(enabled ? ChatFormatting.RED : ChatFormatting.GREEN);
-        client.player.sendSystemMessage(message);
+        client.player.displayClientMessage(message, false);
+    }
+
+    private static KeyMapping registerKeyMapping(KeyMapping keyMapping) {
+        try {
+            Method method = KeyBindingHelper.class.getMethod("registerKeyBinding", KeyMapping.class);
+            Object result = method.invoke(null, keyMapping);
+            if (result instanceof KeyMapping mapping) {
+                return mapping;
+            }
+        } catch (NoSuchMethodException e) {
+            for (Method method : KeyBindingHelper.class.getMethods()) {
+                if (!method.getName().equals("registerKeyBinding") || method.getParameterCount() != 1) {
+                    continue;
+                }
+
+                try {
+                    Object result = method.invoke(null, keyMapping);
+                    if (result instanceof KeyMapping mapping) {
+                        return mapping;
+                    }
+                } catch (ReflectiveOperationException ignored) {
+                }
+            }
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
+        }
+
+        return keyMapping;
     }
 }
