@@ -36,7 +36,6 @@ public class Omniscience implements ClientModInitializer {
         ConfigManager.init();
 
         // adding keybinding to settings
-        // Test
         keyBindingOpenSettings = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.omniscience.settings",
                 InputConstants.Type.KEYSYM,
