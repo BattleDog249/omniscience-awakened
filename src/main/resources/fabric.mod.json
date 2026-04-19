@@ -3,7 +3,7 @@
   "id": "${id}",
   "version": "${version}",
   "name": "${name}",
-  "description": "This mod is all about letting you see things you wouldn't normally get to see. It's main use is revealing invisible entities.",
+  "description": "See the unseen. Improves visibility of hidden game elements.",
   "authors": [
     "BattleDog249",
     "thatDudo"
