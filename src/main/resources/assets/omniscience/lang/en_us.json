@@ -33,7 +33,7 @@
   "config.generic.misc.expose_barriers.title": "Expose Barrier Blocks",
   "config.generic.misc.expose_barriers.tooltip": "Will highlight barrier blocks without\nthe need to hold a barrier item or be\nin Creative mode",
   "config.generic.misc.name_tags.title": "Force Render Name Tags",
-  "config.generic.misc.name_tags.tooltip": "Forces name tags to render.\nAlways = Circumvent server plugins that hide name tags.\nSneaking = Render name tags of sneaking players.\nNone = Don't force name tags to render.",
+  "config.generic.misc.name_tags.tooltip": "Forces name tags to render.\nAlways = Force all name tags to render.\nSneaking = Render name tags of sneaking players.\nNone = Vanilla name tag rendering.",
   "config.generic.misc.name_tags.option.never": "None",
   "config.generic.misc.name_tags.option.when_sneaking": "Sneaking",
   "config.generic.misc.name_tags.option.always": "Always",

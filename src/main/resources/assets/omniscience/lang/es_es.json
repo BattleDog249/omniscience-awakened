@@ -33,7 +33,7 @@
   "config.generic.misc.expose_barriers.title": "Exponer bloques barrera",
   "config.generic.misc.expose_barriers.tooltip": "Resaltará bloques barrera sin\nnecesidad de sostener un objeto barrera o estar\nen modo Creativo",
   "config.generic.misc.name_tags.title": "Forzar renderizado de nombres",
-  "config.generic.misc.name_tags.tooltip": "Forza el renderizado de las etiquetas de nombre.\nAlways = Evita plugins del servidor que ocultan etiquetas de nombre.\nSneaking = Renderiza las etiquetas de nombre de los jugadores agachados.\nNone = No fuerza el renderizado de etiquetas de nombre.",
+  "config.generic.misc.name_tags.tooltip": "Forza el renderizado de las etiquetas de nombre.\nAlways = Fuerza el renderizado de todas las etiquetas de nombre.\nSneaking = Renderiza las etiquetas de nombre de los jugadores agachados.\nNone = Renderizado de etiquetas de nombre en modo Vanilla.",
   "config.generic.misc.name_tags.option.never": "Ninguno",
   "config.generic.misc.name_tags.option.when_sneaking": "Agachado",
   "config.generic.misc.name_tags.option.always": "Siempre",

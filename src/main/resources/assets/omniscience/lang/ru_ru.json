@@ -1,0 +1,42 @@
+{
+  "message.enabled": "%s включен",
+  "message.disabled": "%s отключен",
+
+  "key.category.minecraft.omniscience": "Omniscience",
+  "key.omniscience.settings": "Открыть настройки",
+  "key.omniscience.enable": "Переключить включение",
+
+  "config.generic.title": "Общие",
+  "config.generic.enabled.title": "Включено",
+  "config.generic.enabled.tooltip": "Полностью включает или отключает этот мод",
+
+  "config.generic.alpha.title": "Прозрачность целей",
+  "config.generic.alpha.tooltip": "Устанавливает прозрачность невидимых сущностей",
+  "config.generic.glow.title": "Выделять невидимые сущности",
+  "config.generic.glow.tooltip": "Выбранные цели получают эффект свечения в невидимом состоянии.\nNone = Без эффекта свечения.\nPlayers = Только игроки получают эффект свечения.\nTargets = Все выбранные цели получают эффект свечения.",
+  "config.generic.glow.option.none": "Нет",
+  "config.generic.glow.option.player": "Игроки",
+  "config.generic.glow.option.match_targets": "Цели",
+
+  "config.generic.targeted.title": "Цели",
+  "config.generic.targeted.tooltip": "Невидимые сущности, которые должны быть обнаружены",
+  "config.generic.targeted.all.title": "Все",
+  "config.generic.targeted.players.title": "Игроки",
+  "config.generic.targeted.monster.title": "Монстры",
+  "config.generic.targeted.villager.title": "NPC",
+  "config.generic.targeted.animals.title": "Животные",
+  "config.generic.targeted.objects.title": "Объекты",
+
+  "config.generic.misc.title": "Прочее",
+  "config.generic.misc.remove_blindness.title": "Убрать слепоту",
+  "config.generic.misc.remove_blindness.tooltip": "Удаляет туман эффекта слепоты",
+  "config.generic.misc.expose_barriers.title": "Выделять барьерные блоки",
+  "config.generic.misc.expose_barriers.tooltip": "Выделяет барьерные блоки без необходимости держать предмет барьера или находиться в режиме Творчества",
+  "config.generic.misc.name_tags.title": "Принудительно отображать имена",
+  "config.generic.misc.name_tags.tooltip": "Принуждает отображать метки имен.\nAlways = Принудительно отображать все метки имен.\nSneaking = Отображать метки имен подкрадывающихся игроков.\nNone = Отображение меток имен по умолчанию.",
+  "config.generic.misc.name_tags.option.never": "Нет",
+  "config.generic.misc.name_tags.option.when_sneaking": "При приседании",
+  "config.generic.misc.name_tags.option.always": "Всегда",
+  "config.generic.misc.only_creative.title": "Только в креативе",
+  "config.generic.misc.only_creative.tooltip": "Включает мод только когда игрок находится в режиме Творчества"
+}

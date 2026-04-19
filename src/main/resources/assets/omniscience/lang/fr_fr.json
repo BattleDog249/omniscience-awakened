@@ -1,0 +1,42 @@
+{
+  "message.enabled": "%s activé",
+  "message.disabled": "%s désactivé",
+
+  "key.category.minecraft.omniscience": "Omniscience",
+  "key.omniscience.settings": "Ouvrir les paramètres",
+  "key.omniscience.enable": "Basculer activé",
+
+  "config.generic.title": "Général",
+  "config.generic.enabled.title": "Activé",
+  "config.generic.enabled.tooltip": "Active ou désactive complètement ce mod",
+
+  "config.generic.alpha.title": "Transparence des cibles",
+  "config.generic.alpha.tooltip": "Définit la transparence des entités invisibles",
+  "config.generic.glow.title": "Mettre en évidence les entités invisibles",
+  "config.generic.glow.tooltip": "Les cibles choisies reçoivent un effet de lueur lorsqu'elles sont invisibles.\nNone = Pas d'effet de lueur.\nPlayers = Seuls les joueurs reçoivent un effet de lueur.\nTargets = Toutes les entités ciblées reçoivent un effet de lueur.",
+  "config.generic.glow.option.none": "Aucun",
+  "config.generic.glow.option.player": "Joueurs",
+  "config.generic.glow.option.match_targets": "Cibles",
+
+  "config.generic.targeted.title": "Cibles",
+  "config.generic.targeted.tooltip": "Entités invisibles qui doivent être révélées",
+  "config.generic.targeted.all.title": "Toutes",
+  "config.generic.targeted.players.title": "Joueurs",
+  "config.generic.targeted.monster.title": "Monstres",
+  "config.generic.targeted.villager.title": "PNJ",
+  "config.generic.targeted.animals.title": "Animaux",
+  "config.generic.targeted.objects.title": "Objets",
+
+  "config.generic.misc.title": "Divers",
+  "config.generic.misc.remove_blindness.title": "Supprimer la cécité",
+  "config.generic.misc.remove_blindness.tooltip": "Supprime le brouillard de l'effet de cécité",
+  "config.generic.misc.expose_barriers.title": "Afficher les blocs barrière",
+  "config.generic.misc.expose_barriers.tooltip": "Met en évidence les blocs barrière sans avoir besoin de tenir un objet barrière ou d'être en mode Créatif",
+  "config.generic.misc.name_tags.title": "Forcer l'affichage des noms",
+  "config.generic.misc.name_tags.tooltip": "Force l'affichage des étiquettes de nom.\nAlways = Forcer l'affichage de toutes les étiquettes de nom.\nSneaking = Afficher les étiquettes de nom des joueurs accroupis.\nNone = Affichage des étiquettes de nom en mode vanilla.",
+  "config.generic.misc.name_tags.option.never": "Aucun",
+  "config.generic.misc.name_tags.option.when_sneaking": "Accroupi",
+  "config.generic.misc.name_tags.option.always": "Toujours",
+  "config.generic.misc.only_creative.title": "Créatif uniquement",
+  "config.generic.misc.only_creative.tooltip": "Active le mod uniquement lorsque le joueur est en mode Créatif"
+}
