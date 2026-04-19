@@ -8,6 +8,7 @@
     "EntityVisibilityMixin",
     "EntityGlowMixin",
     "ModelPartAlphaMixin",
+    "LivingEntityRendererModelTintMixin",
     "BlindnessFogMixin",
     "InvisibleSheepWoolMixin",
     "BarrierMarkerMixin"
