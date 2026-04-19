@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.battle.omniscience.config.ConfigManager;
 
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 
@@ -22,13 +22,13 @@ public class ForceNameTagMixin {
         method = "shouldShowName(Lnet/minecraft/world/entity/Avatar;D)Z",
         cancellable = true
     )
-    private void onShouldShowName(Entity entity, double distance, CallbackInfoReturnable<Boolean> cir) {
+    private void onShouldShowName(Avatar avatar, double distance, CallbackInfoReturnable<Boolean> cir) {
         var config = ConfigManager.getConfig();
         if (config == null || !config.isEnabled()) {
             return;
         }
 
-        if (!(entity instanceof Player player)) {
+        if (!(avatar instanceof Player player)) {
             return;
         }
 
