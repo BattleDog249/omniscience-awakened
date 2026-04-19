@@ -10,8 +10,11 @@ import com.battle.omniscience.config.ConfigManager;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
+/**
+ * Adjusts the model tint alpha for invisible entities when the mod is enabled.
+ */
 @Mixin(LivingEntityRenderer.class)
-public abstract class LivingEntityRendererModelTintMixin {
+public abstract class LivingEntityRendererTintMixin {
 
     @Inject(at = @At("RETURN"), method = "getModelTint(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;)I", cancellable = true)
     private void onGetModelTint(LivingEntityRenderState renderState, CallbackInfoReturnable<Integer> cir) {
