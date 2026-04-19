@@ -7,7 +7,11 @@ import com.battle.omniscience.gui.ScreenBuilder;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+//? if >=26.1 {
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+//?} else {
+/*import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+*///?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -36,18 +40,29 @@ public class Omniscience implements ClientModInitializer {
         ConfigManager.init();
 
         // adding keybinding to settings
+        //? if >=26.1 {
         keyBindingOpenSettings = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.omniscience.settings",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 OMNISCIENCE));
-
         keyToggleEnabled = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.omniscience.enable",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 OMNISCIENCE));
-
+        //?} else {
+        /*keyBindingOpenSettings = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+                "key.omniscience.settings",
+                InputConstants.Type.KEYSYM,
+                GLFW.GLFW_KEY_UNKNOWN,
+                OMNISCIENCE));
+        keyToggleEnabled = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+                "key.omniscience.enable",
+                InputConstants.Type.KEYSYM,
+                GLFW.GLFW_KEY_UNKNOWN,
+                OMNISCIENCE));
+        *///?}
         ClientTickEvents.END_CLIENT_TICK.register(this::tick);
     }
 
@@ -69,6 +84,10 @@ public class Omniscience implements ClientModInitializer {
         ConfigManager.getConfig().enabled = !enabled;
         Component message = Component.translatable(enabled ? "message.disabled" : "message.enabled", MOD_NAME)
                 .withStyle(enabled ? ChatFormatting.RED : ChatFormatting.GREEN);
+        //? if >=26.1 {
         client.player.sendSystemMessage(message);
+        //?} else {
+        /*client.player.displayClientMessage(message, true);
+        *///?}
     }
 }

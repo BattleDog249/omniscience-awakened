@@ -13,7 +13,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+//? if >=26.1 {
 import net.minecraft.client.renderer.state.level.CameraRenderState;
+//?} else {
+/*import net.minecraft.client.renderer.state.CameraRenderState;
+*///?}
 import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.player.Player;
 
@@ -81,10 +85,14 @@ public class ForceNameTagMixin {
         diagnosticCalls++;
     }
 
+    //? if >=26.1 {
     @Inject(at = @At("HEAD"), method = "submitNameDisplay(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V")
+    //?} else {
+    /*@Inject(at = @At("HEAD"), method = "submitNameTag(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V")
+    *///?}
     private void onSubmitNameDisplay(AvatarRenderState state, PoseStack stack, SubmitNodeCollector collector, CameraRenderState camera, CallbackInfo ci) {
         if (diagnosticCalls < 20) {
-            boolean renderNames = Minecraft.getInstance().renderNames();
+            boolean renderNames = Minecraft.renderNames();
             String nameTag = state.nameTag == null ? "null" : state.nameTag.getString();
             String scoreText = state.scoreText == null ? "null" : state.scoreText.getString();
             System.out.println("[Omniscience] ForceNameTagMixin submitNameDisplay called renderNames=" + renderNames +
