@@ -15,6 +15,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+/**
+ * Tracks entity target groups and reveals invisible entities for targeted groups.
+ */
 @Mixin(Entity.class)
 public abstract class EntityVisibilityMixin implements EntityMixinAccess {
     private int entityTargetGroup;

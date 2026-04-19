@@ -12,6 +12,10 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+/**
+ * Makes barrier blocks visible by forcing the client marker particle target to BARRIER
+ * when the expose barrier blocks option is enabled.
+ */
 @Mixin(ClientLevel.class)
 public class BarrierMarkerMixin {
     @Inject(at = @At("HEAD"), method = "getMarkerParticleTarget", cancellable = true)
