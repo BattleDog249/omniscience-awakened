@@ -7,28 +7,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.battle.omniscience.config.ConfigManager;
 
-import net.minecraft.world.entity.Avatar;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 
 /**
  * Forces player name tags to render when the corresponding config mode is enabled.
  */
-@Mixin(AvatarRenderer.class)
+@Mixin(LivingEntityRenderer.class)
 public class ForceNameTagMixin {
 
     @Inject(
         at = @At("HEAD"),
-        method = "shouldShowName(Lnet/minecraft/world/entity/Avatar;D)Z",
+        method = {
+            "shouldShowName(Lnet/minecraft/world/entity/LivingEntity;D)Z",
+            "shouldShowName(Lnet/minecraft/world/entity/Entity;D)Z"
+        },
         cancellable = true
     )
-    private void onShouldShowName(Avatar avatar, double distance, CallbackInfoReturnable<Boolean> cir) {
+    private void onShouldShowName(Entity entity, double distance, CallbackInfoReturnable<Boolean> cir) {
         var config = ConfigManager.getConfig();
         if (config == null || !config.isEnabled()) {
             return;
         }
 
-        if (!(avatar instanceof Player player)) {
+        if (!(entity instanceof Player player)) {
             return;
         }
 
