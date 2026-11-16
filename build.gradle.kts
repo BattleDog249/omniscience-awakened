@@ -1,7 +1,3 @@
-@file:OptIn(StonecutterExperimentalAPI::class)
-
-import dev.kikugie.stonecutter.StonecutterExperimentalAPI
-
 plugins {
     // This plugin applies the correct loom variant based on the Minecraft version
     id("dev.kikugie.loom-back-compat")
@@ -23,23 +19,23 @@ val requiredJava: JavaVersion = when {
 val compatibleVersions: List<String> = sc.properties.rawOrNull("mod", "mc_releases")
     ?.asList().orEmpty().map { it.toString() }
 
-repositories {
-    /**
-     * Restricts dependency search of the given [groups] to the [maven URL][url],
-     * improving the setup speed.
-     */
-    fun strictMaven(url: String, alias: String, vararg groups: String) = exclusiveContent {
-        forRepository { maven(url) { name = alias } }
-        filter { groups.forEach(::includeGroup) }
+loom {
+    fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
+    //accessWidenerPath = sc.process(
+    //    rootProject.file("src/main/resources/omniscience-awakened.ct"),
+    //    "build/processed.ct"
+    //)
+
+    decompilerOptions.named("vineflower") {
+        options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
     }
-    strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
-    strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
 
-    // Cloth Config
-    maven { url = uri("https://maven.shedaniel.me/") }
-
-    // Mod Menu
-    maven { url = uri("https://maven.terraformersmc.com/releases/") }
+    runConfigs.all {
+        preferGradleTask = true
+        generateRunConfig = true
+        runDirectory = rootProject.file("run") // Shares the run directory between versions
+        jvmArguments.add("-Dmixin.debug.export=true") // Exports transformed classes for debugging
+    }
 }
 
 dependencies {
@@ -55,31 +51,15 @@ dependencies {
     // Applies Mojang Mappings on obfuscated versions
     loomx.applyMojangMappings()
 
+    // Use `mod{dependency type}` even on 26.1+ - loom-back-compat converts them
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0")
+    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-registry-sync-v0")
 
     // Cloth Config
     modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_config")}")
 
     // Mod Menu
     modApi("com.terraformersmc:modmenu:${property("deps.mod_menu")}")
-}
-
-loom {
-    fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
-    //accessWidenerPath = sc.process(
-        //rootProject.file("src/main/resources/template.ct"),
-        //"build/processed.ct"
-    //)
-
-    decompilerOptions.named("vineflower") {
-        options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
-    }
-
-    runConfigs.all {
-        vmArgs("-Dmixin.debug.export=true") // Exports transformed classes for debugging
-        runDir = "../../run" // Shares the run directory between versions
-    }
 }
 
 java {
@@ -114,13 +94,13 @@ tasks {
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }
     }
 
-    // Builds the version into a shared folder in `build/libs/${mod version}/`
     register<Copy>("buildAndCollect") {
         group = "build"
+        description = "Builds mod jars and copies results to `build/libs/{mod version}/`"
 
+        inputs.property("version", project.property("mod.version"))
         // loomx.mod(Sources)Jar returns the jar task for the applied loom variant
-        from(loomx.modJar.map { it.archiveFile }, loomx.modSourcesJar.map { it.archiveFile })
+        from(loomx.modJar.flatMap { it.archiveFile }, loomx.modSourcesJar.flatMap { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
-        dependsOn("build")
     }
 }

@@ -1,24 +1,44 @@
-# See https://stonecutter.kikugie.dev/wiki/config/properties#centralized-properties
+# See https://stonecutter.kikugie.dev/wiki/v2/reference/gradle-api/structured-properties
 mod.id = "omniscience-awakened"
 mod.name = "Omniscience Awakened"
 mod.group = "com.battle"
-mod.version = "1.2.3"
+mod.version = "1.3.0"
 
-deps.fabric_loader = "0.19.2"
-loomx.loom_version = "1.16-SNAPSHOT"
-
-["1.21.11"]
-mod.mc_compat = "1.21.11"
-mod.mc_releases = ["1.21.11"]
-
-deps.fabric_api = "0.141.3+1.21.11"
-deps.cloth_config = "21.11.153"
-deps.mod_menu = "17.0.0"
+deps.fabric_loader = "0.20.1"
+loomx.loom_version = "1.20.0-alpha.31"
 
 ["26.1"]
-mod.mc_compat = "~26.1"
+# Mod compatibility range in fabric.mod.json
+mod.mc_compat = ">=26.1 <=26.1.2"
+
+# List of releases to be marked compatible on Modrinth/Curseforge
 mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
 
-deps.fabric_api = "0.148.0+26.1.2"
+# Per-version dependencies
+deps.fabric_api = "0.155.3+26.1.2"
 deps.cloth_config = "26.1.154"
-deps.mod_menu = "18.0.0-alpha.8"
+deps.mod_menu = "18.0.2"
+
+["26.2"]
+# Mod compatibility range in fabric.mod.json
+mod.mc_compat = "26.2"
+
+# List of releases to be marked compatible on Modrinth/Curseforge
+mod.mc_releases = ["26.2"]
+
+# Per-version dependencies
+deps.fabric_api = "0.161.0+26.2"
+deps.cloth_config = "26.2.155"
+deps.mod_menu = "20.0.3"
+
+#["26.3"]
+# Mod compatibility range in fabric.mod.json
+#mod.mc_compat = "26.3"
+
+# List of releases to be marked compatible on Modrinth/Curseforge
+#mod.mc_releases = ["26.3"]
+
+# Per-version dependencies
+#deps.fabric_api = "0.166.2+26.3"
+#deps.cloth_config = "26.3.159"
+#deps.mod_menu = "21.0.1"

@@ -27,7 +27,7 @@
   "mixins": [
     "omniscience.mixins.json"
   ],
-  "accessWidener": "template.ct",
+  "accessWidener": "omniscience-awakened.ct",
   "depends": {
     "fabricloader": ">=0.17",
     "minecraft": "${minecraft}"
