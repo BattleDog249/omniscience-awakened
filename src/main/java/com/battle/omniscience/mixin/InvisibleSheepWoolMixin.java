@@ -11,10 +11,12 @@ import com.battle.omniscience.config.ConfigManager;
 import com.battle.omniscience.util.EntityTargetGroup;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+//? if <26.2 {
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+//?}
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.SheepWoolLayer;
 import net.minecraft.client.renderer.entity.state.SheepRenderState;
@@ -55,17 +57,19 @@ public class InvisibleSheepWoolMixin {
             return;
         }
 
-        MultiBufferSource.BufferSource entityVertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
-        //? if >=26.1 {
-        VertexConsumer vertexConsumer2 = entityVertexConsumers.getBuffer(RenderTypes.entityTranslucentCullItemTarget(sheepRenderState.isBaby ? BABY_SHEEP_WOOL_LOCATION : SHEEP_WOOL_LOCATION));
-        //?} else {
-         /*VertexConsumer vertexConsumer2 = entityVertexConsumers.getBuffer(RenderTypes.entityTranslucent(SHEEP_WOOL_LOCATION));
-        *///?}
         EntityModel<SheepRenderState> model = sheepRenderState.isBaby ? this.babyModel : this.adultModel;
+        Identifier location = sheepRenderState.isBaby ? BABY_SHEEP_WOOL_LOCATION : SHEEP_WOOL_LOCATION;
         int color = sheepRenderState.getWoolColor() & 0x26FFFFFF;
         int overlay = LivingEntityRenderer.getOverlayCoords(sheepRenderState, 0.0f);
 
-        model.renderToBuffer(matrixStack, vertexConsumer2, light, overlay, color);
+        //? if >=26.2 {
+        submitNodeCollector.order(sheepRenderState.isBaby ? 1 : 0)
+                .submitModel(model, sheepRenderState, matrixStack, RenderTypes.entityTranslucent(location), light, overlay, color, null, sheepRenderState.outlineColor, null);
+        //?} else {
+         /*MultiBufferSource.BufferSource entityVertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
+         VertexConsumer vertexConsumer2 = entityVertexConsumers.getBuffer(RenderTypes.entityTranslucentCullItemTarget(location));
+         model.renderToBuffer(matrixStack, vertexConsumer2, light, overlay, color);
+        *///?}
         ci.cancel();
     }
 }
