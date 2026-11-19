@@ -1,7 +1,5 @@
 package com.battle.omniscience;
 
-import org.lwjgl.glfw.GLFW;
-
 import com.battle.omniscience.config.ConfigManager;
 import com.battle.omniscience.gui.ScreenBuilder;
 
@@ -43,24 +41,20 @@ public class Omniscience implements ClientModInitializer {
         //? if >=26.1 {
         keyBindingOpenSettings = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.omniscience.settings",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_UNKNOWN,
+                InputConstants.UNKNOWN.getValue(),
                 OMNISCIENCE));
         keyToggleEnabled = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.omniscience.enable",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_UNKNOWN,
+                InputConstants.UNKNOWN.getValue(),
                 OMNISCIENCE));
         //?} else {
         /*keyBindingOpenSettings = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "key.omniscience.settings",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_UNKNOWN,
+                InputConstants.UNKNOWN.getValue(),
                 OMNISCIENCE));
         keyToggleEnabled = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "key.omniscience.enable",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_UNKNOWN,
+                InputConstants.UNKNOWN.getValue(),
                 OMNISCIENCE));
         *///?}
         ClientTickEvents.END_CLIENT_TICK.register(this::tick);

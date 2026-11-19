@@ -22,7 +22,7 @@ plugins {
 stonecutter {
     create(rootProject) {
         // See https://stonecutter.kikugie.dev/wiki/v2/guides/tools/minecraft-changes
-        versions("26.1", "26.2")
+        versions("26.1", "26.2", "26.3")
     }
 }
 
