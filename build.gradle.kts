@@ -21,10 +21,10 @@ val compatibleVersions: List<String> = sc.properties.rawOrNull("mod", "mc_releas
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
-    //accessWidenerPath = sc.process(
-    //    rootProject.file("src/main/resources/omniscience-awakened.ct"),
-    //    "build/processed.ct"
-    //)
+    accessWidenerPath = sc.process(
+        rootProject.file("src/main/resources/omniscience-awakened.ct"),
+        "build/processed.ct"
+    )
 
     decompilerOptions.named("vineflower") {
         options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
