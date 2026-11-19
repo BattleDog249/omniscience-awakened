@@ -12,10 +12,10 @@ import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Phantom;
 //? if >=26.2 {
- /*import net.minecraft.world.entity.monster.cubemob.Slime;
- *///?} else {
-import net.minecraft.world.entity.monster.Slime;
-//?}
+ import net.minecraft.world.entity.monster.cubemob.Slime;
+ //?} else {
+/*import net.minecraft.world.entity.monster.Slime;
+*///?}
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader;
 import net.minecraft.world.entity.player.Player;

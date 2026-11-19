@@ -163,9 +163,9 @@ public class ScreenBuilder {
 
     public static void openConfigScreen(Minecraft client) {
         //? if >=26.2 {
-         /*client.gui.setScreen(buildConfigScreen(client.gui.screen()));
-         *///?} else {
-        client.setScreen(buildConfigScreen(client.screen));
-        //?}
+         client.gui.setScreen(buildConfigScreen(client.gui.screen()));
+         //?} else {
+        /*client.setScreen(buildConfigScreen(client.screen));
+        *///?}
     }
 }

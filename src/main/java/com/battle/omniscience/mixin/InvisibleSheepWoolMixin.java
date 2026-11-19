@@ -12,10 +12,10 @@ import com.battle.omniscience.util.EntityTargetGroup;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 //? if <26.2 {
-import com.mojang.blaze3d.vertex.VertexConsumer;
+/*import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-//?}
+*///?}
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.SheepWoolLayer;
@@ -63,10 +63,10 @@ public class InvisibleSheepWoolMixin {
         int overlay = LivingEntityRenderer.getOverlayCoords(sheepRenderState, 0.0f);
 
         //? if <26.2 {
-        MultiBufferSource.BufferSource entityVertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
+        /*MultiBufferSource.BufferSource entityVertexConsumers = Minecraft.getInstance().renderBuffers().bufferSource();
         VertexConsumer vertexConsumer2 = entityVertexConsumers.getBuffer(RenderTypes.entityTranslucentCullItemTarget(location));
         model.renderToBuffer(matrixStack, vertexConsumer2, light, overlay, color);
-        //?}
+        *///?}
         // >=26.2:
         // submitNodeCollector.order(sheepRenderState.isBaby ? 1 : 0)
         //         .submitModel(model, sheepRenderState, matrixStack, RenderTypes.entityTranslucent(location), light, overlay, color, null, sheepRenderState.outlineColor, null);
