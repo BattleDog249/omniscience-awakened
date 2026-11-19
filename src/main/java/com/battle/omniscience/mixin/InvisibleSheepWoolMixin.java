@@ -29,9 +29,7 @@ import net.minecraft.resources.Identifier;
 @Mixin(SheepWoolLayer.class)
 public class InvisibleSheepWoolMixin {
     @Shadow @Final private static Identifier SHEEP_WOOL_LOCATION;
-    //? if >=26.1 {
     @Shadow @Final private static Identifier BABY_SHEEP_WOOL_LOCATION;
-    //?}
     @Shadow @Final private EntityModel<SheepRenderState> adultModel;
     @Shadow @Final private EntityModel<SheepRenderState> babyModel;
 
@@ -67,12 +65,14 @@ public class InvisibleSheepWoolMixin {
         VertexConsumer vertexConsumer2 = entityVertexConsumers.getBuffer(RenderTypes.entityTranslucentCullItemTarget(location));
         model.renderToBuffer(matrixStack, vertexConsumer2, light, overlay, color);
         *///?}
-        // >=26.2:
-        // submitNodeCollector.order(sheepRenderState.isBaby ? 1 : 0)
-        //         .submitModel(model, sheepRenderState, matrixStack, RenderTypes.entityTranslucent(location), light, overlay, color, null, sheepRenderState.outlineColor, null);
-        // >=26.3:
-        // submitNodeCollector.order(sheepRenderState.isBaby ? 1 : 0)
-        //         .submitModel(model, sheepRenderState, matrixStack, RenderTypes.entityTranslucent(location), light, overlay, color, null, sheepRenderState.outlineColor);
+        //? if >=26.2 <26.3 {
+        /*submitNodeCollector.order(sheepRenderState.isBaby ? 1 : 0)
+                .submitModel(model, sheepRenderState, matrixStack, RenderTypes.entityTranslucent(location), light, overlay, color, null, sheepRenderState.outlineColor, null);
+        *///?}
+        //? if >=26.3 {
+        submitNodeCollector.order(sheepRenderState.isBaby ? 1 : 0)
+                .submitModel(model, sheepRenderState, matrixStack, RenderTypes.entityTranslucent(location), light, overlay, color, null, sheepRenderState.outlineColor);
+        //?}
         ci.cancel();
     }
 }
