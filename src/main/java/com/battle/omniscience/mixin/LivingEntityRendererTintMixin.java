@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.battle.omniscience.config.ConfigManager;
+import com.battle.omniscience.util.ColorUtil;
 
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
@@ -32,11 +33,6 @@ public abstract class LivingEntityRendererTintMixin {
         }
 
         int alpha = Math.round(ConfigManager.getConfig().alpha * 255f);
-        alpha = Math.max(0, Math.min(255, alpha));
-        int red = (baseTint >> 16) & 0xFF;
-        int green = (baseTint >> 8) & 0xFF;
-        int blue = baseTint & 0xFF;
-
-        cir.setReturnValue((alpha << 24) | (red << 16) | (green << 8) | blue);
+        cir.setReturnValue(ColorUtil.withAlpha(baseTint, alpha));
     }
 }

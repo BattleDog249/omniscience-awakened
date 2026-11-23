@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import com.battle.omniscience.config.ConfigManager;
+import com.battle.omniscience.util.ColorUtil;
 
 import net.minecraft.client.model.geom.ModelPart;
 
@@ -23,12 +24,7 @@ public class ModelPartAlphaMixin {
         int alpha = (color >> 24) & 0xFF;
         if (alpha != 0xFF) {
             int newAlpha = Math.round(ConfigManager.getConfig().alpha * 255f);
-            newAlpha = Math.max(0, Math.min(255, newAlpha));
-
-            int red = (color >> 16) & 0xFF;
-            int green = (color >> 8) & 0xFF;
-            int blue = color & 0xFF;
-            return (newAlpha << 24) | (red << 16) | (green << 8) | blue;
+            return ColorUtil.withAlpha(color, newAlpha);
         }
 
         return color;
