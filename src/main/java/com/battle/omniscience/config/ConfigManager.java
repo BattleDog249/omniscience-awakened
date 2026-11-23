@@ -54,7 +54,7 @@ public class ConfigManager {
                     String fileContents = FileUtils.readFileToString(configFile, StandardCharsets.UTF_8);
                     config = gson.fromJson(fileContents, Config.class);
 
-                    if (config.validate()) {
+                    if (!config.validate()) {
                         writeConfig(true);
                     }
                 } else {

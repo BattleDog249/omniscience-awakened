@@ -31,7 +31,11 @@ public class Omniscience implements ClientModInitializer {
 
     private KeyMapping keyBindingOpenSettings;
     private KeyMapping keyToggleEnabled;
-    public static boolean isCreative = true;
+    private static volatile boolean isCreative = true;
+
+    public static boolean isCreative() {
+        return isCreative;
+    }
 
     @Override
     public void onInitializeClient() {
@@ -62,7 +66,7 @@ public class Omniscience implements ClientModInitializer {
 
     public void tick(Minecraft client) {
         if (client.player != null) {
-            Omniscience.isCreative = client.player.isCreative();
+            isCreative = client.player.isCreative();
         }
 
         if (keyBindingOpenSettings.consumeClick()) {

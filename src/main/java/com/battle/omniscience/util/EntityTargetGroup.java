@@ -32,6 +32,9 @@ public class EntityTargetGroup {
     public static final int ANIMAL = 16;
     public static final int OBJECT = 32;
 
+    // Mask of all valid target-group bits (ALL through OBJECT).
+    public static final int GROUP_MASK = ALL | PLAYER | MONSTER | VILLAGER | ANIMAL | OBJECT;
+
     public static int getEntityGroup(Entity entity) {
         int entityGroup = 0;
 
@@ -56,6 +59,6 @@ public class EntityTargetGroup {
             entityGroup = EntityTargetGroup.OBJECT;
         }
 
-        return entityGroup | EntityTargetGroup.ALL;
+        return entityGroup;
     }
 }

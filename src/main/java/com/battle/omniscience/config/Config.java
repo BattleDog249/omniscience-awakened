@@ -37,7 +37,7 @@ public class Config {
      * Returns true if the mod is enabled and allowed in the current creative mode setting.
      */
     public boolean isEnabled() {
-        return enabled && (!onlyEnableInCreative || Omniscience.isCreative);
+        return enabled && (!onlyEnableInCreative || Omniscience.isCreative());
     }
 
     public void setAlphaPercent(int i) {
@@ -90,8 +90,12 @@ public class Config {
         this.entityTargetGroup = active ? this.entityTargetGroup | group : this.entityTargetGroup & ~group;
     }
 
+    public boolean isAllTargeted() {
+        return (this.entityTargetGroup & EntityTargetGroup.ALL) > 0;
+    }
+
     public boolean isGroupTargeted(int group) {
-        return (this.entityTargetGroup & group) > 0;
+        return isAllTargeted() || (this.entityTargetGroup & group) > 0;
     }
 
     public boolean isEntityTargeted(Entity entity) {
@@ -131,7 +135,7 @@ public class Config {
             valid = false;
         }
 
-        if (entityTargetGroup < 0 || entityTargetGroup >= 64) {
+        if (entityTargetGroup < 0 || entityTargetGroup > EntityTargetGroup.GROUP_MASK) {
             entityTargetGroup = 0;
             valid = false;
         }
