@@ -12,6 +12,10 @@ import net.minecraft.client.renderer.fog.environment.MobEffectFogEnvironment;
 
 /**
  * Prevents blindness fog rendering when the related config option is enabled.
+ *
+ * <p>Mixin can only inject into methods declared in the target class's own bytecode,
+ * so the {@code instanceof} guard is required to exclude sibling subclasses
+ * (e.g. {@code DarknessFogEnvironment}).
  */
 @Mixin(MobEffectFogEnvironment.class)
 public class BlindnessFogMixin {
