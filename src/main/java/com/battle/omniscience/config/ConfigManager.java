@@ -17,12 +17,19 @@ public class ConfigManager {
     /** Indicates whether the configuration subsystem has been initialized. */
     private static boolean initialized = false;
 
-    private static Config config = null;
+    /**
+     * The active configuration. Initialized with a default instance so
+     * {@link #getConfig()} never returns null. Volatile because the reference
+     * is reassigned on the executor thread while the render thread reads it.
+     */
+    private static volatile Config config = new Config();
     private static final Config defaults = new Config();
 
     private static Gson gson;
     private static File configFile;
 
+    // Never shut down: the client JVM exits via System.exit, so the single
+    // background thread is harmless for the lifetime of the process.
     private static final Executor executor = Executors.newSingleThreadExecutor();
 
     /**
@@ -52,9 +59,16 @@ public class ConfigManager {
             try {
                 if (configFile.exists()) {
                     String fileContents = FileUtils.readFileToString(configFile, StandardCharsets.UTF_8);
-                    config = gson.fromJson(fileContents, Config.class);
+                    Config loaded = gson.fromJson(fileContents, Config.class);
 
-                    if (!config.validate()) {
+                    if (loaded == null) {
+                        writeNewConfig();
+                        return;
+                    }
+
+                    config = loaded;
+
+                    if (!loaded.validate()) {
                         writeConfig(true);
                     }
                 } else {
@@ -87,10 +101,8 @@ public class ConfigManager {
     public static void writeConfig(boolean async) {
         Runnable task = () -> {
             try {
-                if (config != null) {
-                    String serialized = gson.toJson(config);
-                    FileUtils.writeStringToFile(configFile, serialized, StandardCharsets.UTF_8);
-                }
+                String serialized = gson.toJson(config);
+                FileUtils.writeStringToFile(configFile, serialized, StandardCharsets.UTF_8);
             } catch (Exception e) {
                 e.printStackTrace();
             }

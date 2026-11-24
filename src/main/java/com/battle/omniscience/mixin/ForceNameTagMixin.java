@@ -27,7 +27,7 @@ public class ForceNameTagMixin {
     )
     private void onShouldShowName(Entity entity, double distance, CallbackInfoReturnable<Boolean> cir) {
         var config = ConfigManager.getConfig();
-        if (config == null || !config.isEnabled()) {
+        if (!config.isEnabled()) {
             return;
         }
 

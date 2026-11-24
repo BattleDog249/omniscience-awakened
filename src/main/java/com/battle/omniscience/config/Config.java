@@ -12,14 +12,16 @@ import net.minecraft.world.entity.Entity;
 
 public class Config {
 
-    @Expose public boolean enabled = true;
-    @Expose public float alpha = 0.40f;
-    @Expose public int invisibleEntityGlow = 0;
-    @Expose public int entityTargetGroup = EntityTargetGroup.PLAYER | EntityTargetGroup.MONSTER | EntityTargetGroup.VILLAGER | EntityTargetGroup.ANIMAL;
-    @Expose public int forceRenderNameTags = 0;
-    @Expose public boolean exposeBarrierBlocks = false;
-    @Expose public boolean removeBlindnessEffect = false;
-    @Expose public boolean onlyEnableInCreative = false;
+    // Fields are volatile: written on the executor thread (config save) and
+    // read from the render thread every frame.
+    @Expose public volatile boolean enabled = true;
+    @Expose public volatile float alpha = 0.40f;
+    @Expose public volatile int invisibleEntityGlow = 0;
+    @Expose public volatile int entityTargetGroup = EntityTargetGroup.PLAYER | EntityTargetGroup.MONSTER | EntityTargetGroup.VILLAGER | EntityTargetGroup.ANIMAL;
+    @Expose public volatile int forceRenderNameTags = 0;
+    @Expose public volatile boolean exposeBarrierBlocks = false;
+    @Expose public volatile boolean removeBlindnessEffect = false;
+    @Expose public volatile boolean onlyEnableInCreative = false;
 
     @Expose public static final String[] ForceRenderNameTagsStrings = {
             Component.translatable("config.generic.misc.name_tags.option.never").getString(),
